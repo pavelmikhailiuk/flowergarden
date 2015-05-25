@@ -69,6 +69,6 @@ public class PotFlower extends Flower {
                 "temperature=" + temperature +
                 ", lighting=" + lighting +
                 ", watering=" + watering +
-                '}';
+                "}" + "\n";
     }
 }

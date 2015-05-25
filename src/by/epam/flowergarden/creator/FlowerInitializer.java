@@ -1,11 +1,9 @@
-package by.epam.flowergarden.builder;
+package by.epam.flowergarden.creator;
 
 
 import by.epam.flowergarden.entity.LightingLevel;
-import org.apache.log4j.Logger;
 
 public class FlowerInitializer {
-    final static Logger LOGGER = Logger.getLogger(FlowerInitializer.class);
 
     private String name;
     private int price;
@@ -80,43 +78,5 @@ public class FlowerInitializer {
         return sellBy;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setLeavesColor(String leavesColor) {
-        this.leavesColor = leavesColor;
-    }
-
-    public void setFlowersColor(String flowersColor) {
-        this.flowersColor = flowersColor;
-    }
-
-    public void setStalkLength(int stalkLength) {
-        this.stalkLength = stalkLength;
-    }
-
-    public void setFreshnessLevel(int freshnessLevel) {
-        this.freshnessLevel = freshnessLevel;
-    }
-
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
-    }
-
-    public void setLighting(LightingLevel lighting) {
-        this.lighting = lighting;
-    }
-
-    public void setWatering(int watering) {
-        this.watering = watering;
-    }
-
-    public void setSellBy(int sellBy) {
-        this.sellBy = sellBy;
-    }
 }

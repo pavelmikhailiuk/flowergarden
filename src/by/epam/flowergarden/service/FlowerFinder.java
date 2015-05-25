@@ -1,4 +1,4 @@
-package by.epam.flowergarden.util;
+package by.epam.flowergarden.service;
 
 
 import by.epam.flowergarden.entity.Bouquet;

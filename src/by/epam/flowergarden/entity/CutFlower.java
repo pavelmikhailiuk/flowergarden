@@ -43,6 +43,6 @@ public class CutFlower extends Flower {
     public String toString() {
         return "CuttedFlower{" + super.toString() +
                 "sellBy=" + sellBy +
-                '}';
+                "}" + "\n";
     }
 }

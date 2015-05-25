@@ -2,6 +2,7 @@ package by.epam.flowergarden.entity;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Bouquet {
@@ -18,7 +19,7 @@ public class Bouquet {
     }
 
     public List<BouquetAccessories> getAccessories() {
-        return accessories;
+        return Collections.unmodifiableList(accessories);
     }
 
     public void addFlower(Flower flower) {
@@ -27,5 +28,13 @@ public class Bouquet {
 
     public void addAccessory(BouquetAccessories bouquetAccessory) {
         accessories.add(bouquetAccessory);
+    }
+
+    public boolean remove(Flower flower) {
+        return flowerList.remove(flower);
+    }
+
+    public boolean remove(BouquetAccessories bouquetAccessories) {
+        return accessories.remove(bouquetAccessories);
     }
 }
