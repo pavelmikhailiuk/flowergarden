@@ -16,4 +16,11 @@ public enum BouquetAccessories {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append("BouquetAccessories{").append(this.name()).append(", price=")
+                .append(price).append("}").toString();
+    }
 }

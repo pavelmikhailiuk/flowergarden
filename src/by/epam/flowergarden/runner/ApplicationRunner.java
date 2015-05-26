@@ -5,14 +5,15 @@ import by.epam.flowergarden.creator.BouquetCreator;
 import by.epam.flowergarden.entity.Bouquet;
 import by.epam.flowergarden.entity.Flower;
 import by.epam.flowergarden.exception.TechnicalException;
-import by.epam.flowergarden.service.FlowerFinder;
-import by.epam.flowergarden.service.FlowerSorter;
-import by.epam.flowergarden.service.PriceCalculator;
-import by.epam.flowergarden.service.Reporter;
+import by.epam.flowergarden.reporter.Reporter;
+import by.epam.flowergarden.service.FlowerService;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.util.List;
+
+import static by.epam.flowergarden.constant.Constants.MAX_STALK_LENGTH;
+import static by.epam.flowergarden.constant.Constants.MIN_STALK_LENGTH;
 
 
 public class ApplicationRunner {
@@ -26,26 +27,21 @@ public class ApplicationRunner {
         BouquetCreator bouquetCreator = new BouquetCreator();
         Bouquet bouquet = bouquetCreator.create();
         Reporter reporter = new Reporter();
+        FlowerService flowerService = new FlowerService();
+        List<Flower> sortedFlowers = flowerService.sortByFreshness(bouquet);
+        List<Flower> foundFlowers = flowerService.findStalkLength(bouquet, MIN_STALK_LENGTH, MAX_STALK_LENGTH);
+        int bouquetPrice = flowerService.calculate(bouquet);
         try {
-            reporter.print(bouquet);
+            boolean isPrinted = reporter.report(bouquet);
+            LOGGER.info(isPrinted);
+            isPrinted = reporter.report(sortedFlowers);
+            LOGGER.info(isPrinted);
+            isPrinted = reporter.report(foundFlowers);
+            LOGGER.info(isPrinted);
+            isPrinted = reporter.report("Bouquet price is: " + bouquetPrice);
+            LOGGER.info(isPrinted);
         } catch (TechnicalException e) {
             LOGGER.error(e);
         }
-        FlowerSorter flowerSorter = new FlowerSorter();
-        flowerSorter.sortByFreshness(bouquet);
-        try {
-            reporter.print(bouquet);
-        } catch (TechnicalException e) {
-            LOGGER.error(e);
-        }
-        FlowerFinder flowerFinder = new FlowerFinder();
-        List<Flower> foundFlowers = flowerFinder.findStalkLength(bouquet, 70, 80);
-        try {
-            reporter.print(foundFlowers);
-        } catch (TechnicalException e) {
-            LOGGER.error(e);
-        }
-        PriceCalculator priceCalculator = new PriceCalculator();
-        priceCalculator.calculate(bouquet);
     }
 }

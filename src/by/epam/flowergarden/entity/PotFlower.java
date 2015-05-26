@@ -65,10 +65,9 @@ public class PotFlower extends Flower {
 
     @Override
     public String toString() {
-        return "PotFlower{" + super.toString() +
-                "temperature=" + temperature +
-                ", lighting=" + lighting +
-                ", watering=" + watering +
-                "}" + "\n";
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append("PotFlower{").append(super.toString()).append("temperature=")
+                .append(temperature).append(", lighting=").append(lighting).append(", watering=")
+                .append(watering).append("}").append("\n").toString();
     }
 }

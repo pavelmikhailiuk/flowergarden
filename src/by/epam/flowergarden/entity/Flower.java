@@ -97,11 +97,10 @@ public abstract class Flower {
 
     @Override
     public String toString() {
-        return "name='" + name + '\'' +
-                ", price=" + price +
-                ", leavesColor='" + leavesColor + '\'' +
-                ", flowersColor='" + flowersColor + '\'' +
-                ", stalkLength=" + stalkLength +
-                ", freshnessLevel=" + freshnessLevel + ", ";
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append("name='").append(name).append("\'").append(", price=").append(price)
+                .append(", leavesColor='").append(leavesColor).append("\'").append(", flowersColor='")
+                .append(flowersColor).append("\'").append(", stalkLength=").append(stalkLength).append(", freshnessLevel=")
+                .append(freshnessLevel).append(", ").toString();
     }
 }

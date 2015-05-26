@@ -1,12 +1,13 @@
 package by.epam.flowergarden.creator;
 
 
-import by.epam.flowergarden.creator.FlowerInitializer;
 import by.epam.flowergarden.entity.CutFlower;
 import by.epam.flowergarden.entity.Flower;
 import by.epam.flowergarden.entity.LightingLevel;
 import by.epam.flowergarden.entity.PotFlower;
 import by.epam.flowergarden.exception.LogicalException;
+
+import static by.epam.flowergarden.constant.Constants.*;
 
 public class FlowerCreator {
 
@@ -37,37 +38,37 @@ public class FlowerCreator {
         if (name != null) {
             flower.setName(name);
         } else {
-            throw new LogicalException("Name is null");
+            throw new LogicalException(NAME_IS_NULL);
         }
         int price = initializer.getPrice();
         if (price > 0) {
             flower.setPrice(price);
         } else {
-            throw new LogicalException("Price is negative");
+            throw new LogicalException(PRICE_IS_NEGATIVE);
         }
         String flowersColor = initializer.getFlowersColor();
         if (flowersColor != null) {
             flower.setFlowersColor(flowersColor);
         } else {
-            throw new LogicalException("Flowers color is null");
+            throw new LogicalException(FLOWERS_COLOR_IS_NULL);
         }
         String leavesColor = initializer.getLeavesColor();
         if (leavesColor != null) {
             flower.setLeavesColor(leavesColor);
         } else {
-            throw new LogicalException("Leaves color is null");
+            throw new LogicalException(LEAVES_COLOR_IS_NULL);
         }
         int stalkLength = initializer.getStalkLength();
         if (stalkLength > 0) {
             flower.setStalkLength(stalkLength);
         } else {
-            throw new LogicalException("Stalk Length is negative");
+            throw new LogicalException(STALK_LENGTH_IS_NEGATIVE);
         }
         int freshnessLevel = initializer.getFreshnessLevel();
         if (freshnessLevel > 0) {
             flower.setFreshnessLevel(freshnessLevel);
         } else {
-            throw new LogicalException("Freshness level is negative");
+            throw new LogicalException(FRESHNESS_LEVEL_IS_NEGATIVE);
         }
     }
 
@@ -86,26 +87,26 @@ public class FlowerCreator {
             if (temperature > 0) {
                 potFlower.setTemperature(temperature);
             } else {
-                throw new LogicalException("Temperature is negative");
+                throw new LogicalException(TEMPERATURE_IS_NEGATIVE);
             }
             LightingLevel lighting = initializer.getLighting();
             if (lighting != null) {
                 potFlower.setLighting(lighting);
             } else {
-                throw new LogicalException("Lighting level is null");
+                throw new LogicalException(LIGHTING_LEVEL_IS_NULL);
             }
             int watering = initializer.getWatering();
             if (watering > 0) {
                 potFlower.setWatering(watering);
             } else {
-                throw new LogicalException("Watering level is null");
+                throw new LogicalException(WATERING_LEVEL_IS_NULL);
             }
         }
         if (cutFlower != null) {
             if (sellBy > 0) {
                 cutFlower.setSellBy(sellBy);
             } else {
-                throw new LogicalException("Sell by is negative");
+                throw new LogicalException(SELL_BY_IS_NEGATIVE);
             }
         }
     }

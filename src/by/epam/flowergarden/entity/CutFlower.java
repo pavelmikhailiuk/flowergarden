@@ -41,8 +41,8 @@ public class CutFlower extends Flower {
 
     @Override
     public String toString() {
-        return "CuttedFlower{" + super.toString() +
-                "sellBy=" + sellBy +
-                "}" + "\n";
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append("CutFlower{").append(super.toString()).append("sellBy=").append(sellBy)
+                .append("}").append("\n").toString();
     }
 }

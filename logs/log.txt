@@ -1,0 +1,4 @@
+2015-05-26 04:51:55 [main] INFO  by.epam.flowergarden.runner.ApplicationRunner:36 - true
+2015-05-26 04:51:55 [main] INFO  by.epam.flowergarden.runner.ApplicationRunner:38 - true
+2015-05-26 04:51:55 [main] INFO  by.epam.flowergarden.runner.ApplicationRunner:40 - true
+2015-05-26 04:51:55 [main] INFO  by.epam.flowergarden.runner.ApplicationRunner:42 - true

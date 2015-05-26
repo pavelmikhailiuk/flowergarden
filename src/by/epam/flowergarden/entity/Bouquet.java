@@ -15,7 +15,7 @@ public class Bouquet {
     }
 
     public List<Flower> getFlowerList() {
-        return flowerList;
+        return Collections.unmodifiableList(flowerList);
     }
 
     public List<BouquetAccessories> getAccessories() {

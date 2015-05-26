@@ -1,10 +1,12 @@
 package by.epam.flowergarden.creator;
 
 
+import by.epam.flowergarden.constant.Constants;
 import by.epam.flowergarden.entity.Bouquet;
 import by.epam.flowergarden.exception.LogicalException;
 import org.apache.log4j.Logger;
 
+import static by.epam.flowergarden.constant.Constants.*;
 import static by.epam.flowergarden.entity.BouquetAccessories.*;
 import static by.epam.flowergarden.entity.LightingLevel.MEDIUM;
 
@@ -23,7 +25,7 @@ public class BouquetCreator {
             flowerCreator = new FlowerCreator(new FlowerInitializer("Orchid", 150000, "darkgreen", "violet", 75, 80, 20, MEDIUM, 300));
             bouquet.addFlower(flowerCreator.createFlower());
         } catch (LogicalException e) {
-            LOGGER.error("Error building flowers", e);
+            LOGGER.error(ERROR_BUILDING_FLOWERS, e);
         }
         bouquet.addAccessory(PACK);
         bouquet.addAccessory(BAND);
