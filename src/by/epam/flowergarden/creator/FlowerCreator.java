@@ -6,109 +6,42 @@ import by.epam.flowergarden.entity.Flower;
 import by.epam.flowergarden.entity.LightingLevel;
 import by.epam.flowergarden.entity.PotFlower;
 import by.epam.flowergarden.exception.LogicalException;
+import org.apache.log4j.Logger;
 
-import static by.epam.flowergarden.constant.Constants.*;
+import static by.epam.flowergarden.constant.Constants.ERROR_BUILDING_FLOWER;
 
 public class FlowerCreator {
+    final static Logger LOGGER = Logger.getLogger(FlowerCreator.class);
+    private Validator validator;
 
-    private Flower flower;
-    private FlowerInitializer initializer;
-
-    public FlowerCreator() {
+    public FlowerCreator(Validator validator) {
+        this.validator = validator;
     }
 
-    public FlowerCreator(FlowerInitializer initializer) {
-        this.initializer = initializer;
-    }
-
-    public Flower createFlower() throws LogicalException {
-        if (initializer.getSellBy() > 0) {
-            flower = new CutFlower();
-        } else {
-            flower = new PotFlower();
+    public Flower createFlower(String name, int price, String leavesColor, String flowersColor, int stalkLength, int freshnessLevel, int temperature, LightingLevel lightingLevel, int watering) {
+        Flower flower = null;
+        try {
+            if (validator.validate(name, price, leavesColor, flowersColor, stalkLength, freshnessLevel) && validator.validate(temperature, lightingLevel, watering)) {
+                flower = new PotFlower(name, price, leavesColor, flowersColor, stalkLength, freshnessLevel, temperature, lightingLevel, watering);
+            }
+        } catch (LogicalException e) {
+            LOGGER.error(ERROR_BUILDING_FLOWER, e);
         }
-        createBasicFeatures();
-        createAdditionalFeatures();
+        return flower;
+    }
+
+    public Flower createFlower(String name, int price, String leavesColor, String flowersColor, int stalkLength, int freshnessLevel, int sellBy) {
+        Flower flower = null;
+        try {
+            if (validator.validate(name, price, leavesColor, flowersColor, stalkLength, freshnessLevel) && validator.validate(sellBy)) {
+                flower = new CutFlower(name, price, leavesColor, flowersColor, stalkLength, freshnessLevel, sellBy);
+            }
+        } catch (LogicalException e) {
+            LOGGER.error(ERROR_BUILDING_FLOWER, e);
+        }
         return flower;
     }
 
 
-    public void createBasicFeatures() throws LogicalException {
-        String name = initializer.getName();
-        if (name != null) {
-            flower.setName(name);
-        } else {
-            throw new LogicalException(NAME_IS_NULL);
-        }
-        int price = initializer.getPrice();
-        if (price > 0) {
-            flower.setPrice(price);
-        } else {
-            throw new LogicalException(PRICE_IS_NEGATIVE);
-        }
-        String flowersColor = initializer.getFlowersColor();
-        if (flowersColor != null) {
-            flower.setFlowersColor(flowersColor);
-        } else {
-            throw new LogicalException(FLOWERS_COLOR_IS_NULL);
-        }
-        String leavesColor = initializer.getLeavesColor();
-        if (leavesColor != null) {
-            flower.setLeavesColor(leavesColor);
-        } else {
-            throw new LogicalException(LEAVES_COLOR_IS_NULL);
-        }
-        int stalkLength = initializer.getStalkLength();
-        if (stalkLength > 0) {
-            flower.setStalkLength(stalkLength);
-        } else {
-            throw new LogicalException(STALK_LENGTH_IS_NEGATIVE);
-        }
-        int freshnessLevel = initializer.getFreshnessLevel();
-        if (freshnessLevel > 0) {
-            flower.setFreshnessLevel(freshnessLevel);
-        } else {
-            throw new LogicalException(FRESHNESS_LEVEL_IS_NEGATIVE);
-        }
-    }
-
-
-    public void createAdditionalFeatures() throws LogicalException {
-        PotFlower potFlower = null;
-        CutFlower cutFlower = null;
-        int sellBy = initializer.getSellBy();
-        if (sellBy > 0) {
-            cutFlower = (CutFlower) flower;
-        } else {
-            potFlower = (PotFlower) flower;
-        }
-        if (potFlower != null) {
-            int temperature = initializer.getTemperature();
-            if (temperature > 0) {
-                potFlower.setTemperature(temperature);
-            } else {
-                throw new LogicalException(TEMPERATURE_IS_NEGATIVE);
-            }
-            LightingLevel lighting = initializer.getLighting();
-            if (lighting != null) {
-                potFlower.setLighting(lighting);
-            } else {
-                throw new LogicalException(LIGHTING_LEVEL_IS_NULL);
-            }
-            int watering = initializer.getWatering();
-            if (watering > 0) {
-                potFlower.setWatering(watering);
-            } else {
-                throw new LogicalException(WATERING_LEVEL_IS_NULL);
-            }
-        }
-        if (cutFlower != null) {
-            if (sellBy > 0) {
-                cutFlower.setSellBy(sellBy);
-            } else {
-                throw new LogicalException(SELL_BY_IS_NEGATIVE);
-            }
-        }
-    }
 }
 
